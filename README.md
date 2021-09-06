@@ -1,4 +1,4 @@
-This is an independent chat app created solely for school purposes only, it includes NodeJS, Express.js, JavaScript, HTML5, CSS3 and Socket.io.
+This is an independent chat app created solely for school purposes, it includes NodeJS, Express.js, JavaScript, HTML5, CSS3 and Socket.io.
 
 With Socket.io implemented you're able to chat in real-time and use our variations of commands containing APIs such as Giphy (https://developers.giphy.com/) and more.
 Three easy steps to start the project -
