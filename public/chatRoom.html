@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat</title>
     <script src="/socket.io/socket.io.js" defer></script>
     <script src="chatRoom.js" defer></script>
-</head>
-<div id="message-box"></div>
-<div id="typing-box"></div>
-<body>
+    <script src="giphy.js" defer></script>
+  </head>
+  <div id="message-box"></div>
+  <div id="typing-box"></div>
+  <body>
     <div class="send-box">
-        <input oninput="someoneIsTyping()" type="text" id="message">
-        <button id="sendBtn">Send</button>
+      <input oninput="someoneIsTyping()" type="text" id="message" />
+      <button id="sendBtn">Send</button>
+      <button id="sendGif">GIF</button>
     </div>
-      <!-- CDN till ett query string library, för att hämta ut query ur url:en -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.1/qs.min.js" integrity="sha512-aTKlYRb1QfU1jlF3k+aS4AqTpnTXci4R79mkdie/bp6Xm51O5O3ESAYhvg6zoicj/PD6VYY0XrYwsWLcvGiKZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</body>
+    <!-- CDN till ett query string library, för att hämta ut query ur url:en -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.1/qs.min.js"
+      integrity="sha512-aTKlYRb1QfU1jlF3k+aS4AqTpnTXci4R79mkdie/bp6Xm51O5O3ESAYhvg6zoicj/PD6VYY0XrYwsWLcvGiKZQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </body>
 </html>
