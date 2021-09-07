@@ -9,10 +9,13 @@
     <script src="chatRoom.js" defer></script>
 </head>
 <div id="message-box"></div>
+<div id="typing-box"></div>
 <body>
     <div class="send-box">
-        <input type="text" id="message">
+        <input oninput="someoneIsTyping()" type="text" id="message">
         <button id="sendBtn">Send</button>
     </div>
+      <!-- CDN till ett query string library, för att hämta ut query ur url:en -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.1/qs.min.js" integrity="sha512-aTKlYRb1QfU1jlF3k+aS4AqTpnTXci4R79mkdie/bp6Xm51O5O3ESAYhvg6zoicj/PD6VYY0XrYwsWLcvGiKZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>
