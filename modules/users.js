@@ -1,10 +1,11 @@
 const userList = [];
 
 //Save user here when they join chat
-function addUserToList(username, id) {
+function addUserToList(username, id, room) {
     const user = {
         username,
-        id
+        id,
+        room
     }
     userList.push(user);
    

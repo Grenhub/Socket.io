@@ -7,12 +7,22 @@ let typing = false;
 let timeout = undefined;
 
 //Get username from url
-const { user } = Qs.parse(location.search, {
+const { user, room, pwd } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
 
+//Passwordcheck
 //Send username to server so we can save this in a list
-socket.emit("joinChat", user);
+socket.emit("joinChat", { user, room, pwd });
+
+//Checks for user that joins room
+socket.on('joined', (incoming) => {
+  console.log(incoming.pwd)
+  if(!incoming.pwd) {
+    alert('WRONG PASSWORD');
+    location.replace('http://localhost:3000');
+  }
+})
 
 function sendMessage() {
   const input = document.getElementById("message");
