@@ -9,6 +9,7 @@ const {
   addUserToList,
   getUserFromList,
   removeUserFromList,
+  usersInChatroom
 } = require("./modules/users");
 
 const { checkPassword, createRoom, addUserToRoom, removeUserIdFromRoom } = require('./modules/rooms');
@@ -37,6 +38,12 @@ io.on("connection", (socket) => {
     socket.join(incoming.room);
     //User id adds to list of rooms
     addUserToRoom(incoming.room, socket.id);
+
+    //Check which users are in the room
+    const usersInRoom = usersInChatroom(incoming.room);
+
+    //Send room info
+    io.to(incoming.room).emit('roomInfo', { users: usersInRoom, name: incoming.room });
     
     //Send message to the user that is connecting
     socket.emit('message', { message: `Welcome to chatroom ${incoming.room}`, userName: 'Bot' });

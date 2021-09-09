@@ -12,23 +12,30 @@
   </head>
 
   <body>
-    <div id="message-box"></div>
-    <div id="typing-box"></div>
-    <div class="send-box">
-      <input
-        oninput="someoneIsTyping(); test()"
-        type="text"
-        id="message"
-        list="test"
-      />
-      <datalist>
-        <option value="/xD"></option>
-        <option value="/kitten"></option>
-        <option value="/programming"></option>
-        <option value="/creepysmile"></option>
-      </datalist>
-      <button id="sendBtn">Send</button>
+    <div class="chat-container">
+      <div class="message-container">
+        <div id="message-box"></div>
+        <div id="typing-box"></div>
+
+        <div class="send-box">
+          <input
+            oninput="someoneIsTyping(); test()"
+            type="text"
+            id="message"
+            list="test"
+          />
+          <datalist>
+            <option value="/xD"></option>
+            <option value="/kitten"></option>
+            <option value="/programming"></option>
+            <option value="/creepysmile"></option>
+          </datalist>
+          <button id="sendBtn">Send</button>
+        </div>
+      </div>
+      <div class="side-users"></div>
     </div>
+
     <!-- CDN till ett query string library, för att hämta ut query ur url:en -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.1/qs.min.js"

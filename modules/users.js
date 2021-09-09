@@ -28,9 +28,23 @@ function removeUserFromList(id) {
     
 }
 
+//Function that returns users in chatroom
+function usersInChatroom(chatroom) {
+    const currentUsers = [];
+    userList.forEach(user => {
+        if(user.room === chatroom) {
+            currentUsers.push(user.username);
+        }   
+    });
+    console.log(`Dessa befinner sig i chattrummet: ${currentUsers}`);
+}
+
+
+
 //Export functions
 module.exports = {
     addUserToList,
     getUserFromList,
-    removeUserFromList
+    removeUserFromList,
+    usersInChatroom
 }
