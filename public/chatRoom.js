@@ -35,6 +35,9 @@ socket.on('joined', (incoming) => {
 function sendMessage() {
   const input = document.getElementById("message");
   const chatMessage = input.value;
+  if(chatMessage.substr(0, 1) === "/") {
+    return;
+  }
 
   if (input.value) {
     //Sends message to server
