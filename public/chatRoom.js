@@ -7,13 +7,21 @@ let typing = false;
 let timeout = undefined;
 
 //Get username from url
-const { user, room, pwd } = Qs.parse(location.search, {
+const { user, room, pwd, newRoom } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
 
-//Passwordcheck
-//Send username to server so we can save this in a list
-socket.emit("joinChat", { user, room, pwd });
+if(!!newRoom) {
+  socket.emit("newRoom", { user, newRoom, pwd });
+
+} else {
+  //Passwordcheck
+  //Send username to server so we can save this in a list
+  console.log(user + room + pwd)
+  socket.emit("joinChat", { user, room, pwd });
+
+}
+
 
 //Checks for user that joins room
 socket.on('joined', (incoming) => {
@@ -58,7 +66,6 @@ function timeoutTypingFunction() {
 function someoneIsTyping() {
   if (typing === false) {
     typing = true;
-    console.log(typing);
     //Send to server that someone is typing
     socket.emit("typing", { typing: typing, userName: user });
     timeout = setTimeout(timeoutTypingFunction, 1000);

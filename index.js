@@ -11,7 +11,7 @@ const {
   removeUserFromList,
 } = require("./modules/users");
 
-const { checkPassword } = require('./modules/rooms');
+const { checkPassword, createRoom, addUserToRoom, removeUserIdFromRoom } = require('./modules/rooms');
 
 //Serves a static file from public folder
 app.use(express.static("public"));
@@ -32,14 +32,30 @@ io.on("connection", (socket) => {
     } else {
       socket.emit('joined', { pwd: true, room: incoming.room });
     }
-
+    
     //User joins room
     socket.join(incoming.room);
-
+    //User id adds to list of rooms
+    addUserToRoom(incoming.room, socket.id);
+    
     //Send message to the user that is connecting
     socket.emit('message', { message: `Welcome to chatroom ${incoming.room}`, userName: 'Bot' });
-
+    
   });
+  
+  //Create new room
+  socket.on('newRoom', (incoming) => {
+    //Add user to user list
+    const user = addUserToList(incoming.user, socket.id, incoming.newRoom);
+    createRoom(incoming.newRoom, incoming.pwd, socket.id);
+    //User joins room
+    socket.join(incoming.newRoom);
+    //User id adds to list of rooms
+    //addUserToRoom(incoming.newRoom, socket.id);
+    //Send message to the user that is connecting
+    socket.emit('message', { message: `Welcome to chatroom ${incoming.newRoom}`, userName: 'Bot' });
+  })
+
 
   //Listen for messages from client
   socket.on("message", (msg) => {
@@ -58,7 +74,7 @@ io.on("connection", (socket) => {
   //Runs when someone is typing
   socket.on("typing", (incoming) => {
     const user = getUserFromList(socket.id);
-    
+   
     //Sends to everyone except current user
     socket.broadcast.to(user.room).emit("typing", incoming);
   });
@@ -67,6 +83,7 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     const user = removeUserFromList(socket.id);
     if (user) {
+      removeUserIdFromRoom(user.room, socket.id)
       //Send to the specific room that user left
       io.to(user.room).emit("leaving", user.username);
     }
