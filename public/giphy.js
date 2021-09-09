@@ -1,6 +1,6 @@
 // Gets API key for giphy
 let APIKEY = "tr2OkLA6uZVI7cP4xHKh6u3empxNQ5rz";
-const sendGif = document.getElementById("sendGif");
+const sendGif = document.getElementById("sendBtn");
 sendGif.addEventListener("click", checkForGif);
 // Calling giphy API
 function checkForGif() {
@@ -8,6 +8,9 @@ function checkForGif() {
   let gifSelector = document.getElementById("message");
   //Checking if first character is /
   if (gifSelector.value.substr(0, 1) === "/") {
+    if(gifSelector.value === '/xD') {
+      return;
+    }
     let str = gifSelector.value;
     url = url.concat(str);
     fetch(url)

@@ -8,6 +8,8 @@
     <script src="/socket.io/socket.io.js" defer></script>
     <script src="chatRoom.js" defer></script>
     <script src="giphy.js" defer></script>
+    <script src="emoji.js" defer></script>
+    <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
@@ -21,12 +23,12 @@
         list="test"
       />
       <datalist>
+        <option value="/xD"></option>
         <option value="/kitten"></option>
         <option value="/programming"></option>
         <option value="/creepysmile"></option>
       </datalist>
       <button id="sendBtn">Send</button>
-      <button id="sendGif">GIF</button>
     </div>
     <!-- CDN till ett query string library, för att hämta ut query ur url:en -->
     <script
