@@ -8,7 +8,6 @@ function addUserToList(username, id, room) {
         room
     }
     userList.push(user);
-   
     return user;
 }
 
