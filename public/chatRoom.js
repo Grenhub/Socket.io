@@ -51,6 +51,12 @@ socket.on("message", (msg) => {
   showMessage(msg);
 });
 
+//Listen for information about chatroom
+socket.on('roomInfo', (incoming) => {
+  /* let userList = incoming.users; */
+
+})
+
 function showMessage(msg) {
   const messageBox = document.getElementById("message-box");
   const message = document.createElement("li");

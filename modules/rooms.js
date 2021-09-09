@@ -64,5 +64,5 @@ module.exports = {
     checkPassword,
     createRoom,
     addUserToRoom,
-    removeUserIdFromRoom
+    removeUserIdFromRoom,
 }
