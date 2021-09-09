@@ -8,5 +8,99 @@
 }
 
 body {
-  background-color: rgb(40, 50, 60);
+  background-color: rgb(27, 30, 73);
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+h2 {
+  color: blanchedalmond;
+  font-size: 4.2rem;
+  margin: 2rem 4rem;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+input {
+  text-align: center;
+  font-size: 30px;
+  margin: 5px;
+}
+
+button {
+  padding: 10px;
+  margin: 5px;
+  font-size: 18px;
+}
+
+button:hover {
+  cursor: pointer;
+  box-shadow: 0 0.2rem 1.4rem 0 rgba(255, 255, 255, 0.8);
+  transition: transform 150ms;
+  transform: scale(1.03);
+}
+
+button#create {
+  color: white;
+  background: linear-gradient(323deg, rgb(51, 53, 172), #ffdab9);
+  background-size: 400% 400%;
+  -webkit-animation: AnimationName 20s ease infinite;
+  -moz-animation: AnimationName 20s ease infinite;
+  animation: AnimationName 20s ease infinite;
+}
+
+button#chat {
+  color: white;
+  background: linear-gradient(323deg, rgb(51, 53, 172), #ffdab9);
+  background-size: 400% 400%;
+  -webkit-animation: AnimationName 20s ease infinite;
+  -moz-animation: AnimationName 20s ease infinite;
+  animation: AnimationName 20s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 4% 0%;
+  }
+  50% {
+    background-position: 97% 100%;
+  }
+  100% {
+    background-position: 4% 0%;
+  }
+}
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 4% 0%;
+  }
+  50% {
+    background-position: 97% 100%;
+  }
+  100% {
+    background-position: 4% 0%;
+  }
+}
+@keyframes AnimationName {
+  0% {
+    background-position: 4% 0%;
+  }
+  50% {
+    background-position: 97% 100%;
+  }
+  100% {
+    background-position: 4% 0%;
+  }
 }

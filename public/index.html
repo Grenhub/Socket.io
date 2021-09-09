@@ -9,19 +9,23 @@
     <script src="logic.js" defer></script>
   </head>
   <body>
-    <h2>Join chatroom</h2>
+    <h2>Join</h2>
+    <div class="container">
     <form action="chatRoom.html">
       <input type="text" name="user" placeholder="Name" />
       <input type="text" name="room" placeholder="Chatroom" id="room"/>
       <input type="password" placeholder="Password" name="pwd"/>
-      <button type="submit">Chat</button>
+      <button type="submit" id="chat">Chat</button>
     </form>
-    <h2>Create chatroom</h2>
+  </div>
+    <h2>Create</h2>
+    <div class="container">
     <form action="chatRoom.html">
       <input type="text" name="user" placeholder="Name" />
       <input type="text" name="newRoom" placeholder="Chatroom" id="room"/>
       <input type="password" placeholder="Password" name="pwd"/>
-      <button type="submit">Create chat</button>
+      <button type="submit" id="create">Create</button>
     </form>
+  </div>
   </body>
 </html>
