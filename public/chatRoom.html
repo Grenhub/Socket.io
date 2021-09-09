@@ -9,11 +9,22 @@
     <script src="chatRoom.js" defer></script>
     <script src="giphy.js" defer></script>
   </head>
-  <div id="message-box"></div>
-  <div id="typing-box"></div>
+
   <body>
+    <div id="message-box"></div>
+    <div id="typing-box"></div>
     <div class="send-box">
-      <input oninput="someoneIsTyping()" type="text" id="message" />
+      <input
+        oninput="someoneIsTyping(); test()"
+        type="text"
+        id="message"
+        list="test"
+      />
+      <datalist>
+        <option value="/kitten"></option>
+        <option value="/programming"></option>
+        <option value="/creepysmile"></option>
+      </datalist>
       <button id="sendBtn">Send</button>
       <button id="sendGif">GIF</button>
     </div>
