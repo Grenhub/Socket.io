@@ -122,3 +122,18 @@ socket.on("leaving", (username) => {
   message.innerText = `${username} has left the chat...`;
   messageBox.append(message);
 });
+
+let inputText = document.getElementById("message");
+inputText.addEventListener("keyup", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("sendBtn").click();
+  }
+});
+
+var typed = new Typed(".jsType", {
+  strings: ["xD", "kitten", "programming", "creepysmile"],
+  typeSpeed: 100,
+  backSpeed: 60,
+  loop: true,
+});
