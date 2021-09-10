@@ -66,7 +66,7 @@ socket.on('roomInfo', (incoming) => {
     }
   }  else {
     let userName = document.createElement('li');
-    userName.innerText = 'Only you have joined';
+    userName.innerText = "You're the only one in this room";
     userContainer.appendChild(userName);
       
   }
