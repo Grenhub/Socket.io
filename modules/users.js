@@ -36,7 +36,7 @@ function usersInChatroom(chatroom) {
             currentUsers.push(user.username);
         }   
     });
-    console.log(`Dessa befinner sig i chattrummet: ${currentUsers}`);
+    return currentUsers;
 }
 
 

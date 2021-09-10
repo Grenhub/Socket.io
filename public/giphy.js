@@ -21,6 +21,7 @@ function checkForGif() {
         let img = document.createElement("img");
         img.src = content.data[0].images.downsized.url;
         img.alt = content.data[0].title;
+        img.classList.add('gif');
         fig.appendChild(img);
         let out = document.querySelector("#message-box");
         out.appendChild(fig);

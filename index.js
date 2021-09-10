@@ -61,6 +61,9 @@ io.on("connection", (socket) => {
     //addUserToRoom(incoming.newRoom, socket.id);
     //Send message to the user that is connecting
     socket.emit('message', { message: `Welcome to chatroom ${incoming.newRoom}`, userName: 'Bot' });
+
+    //Send room info
+    socket.emit('roomInfo', { name: incoming.newRoom });
   })
 
 
@@ -78,6 +81,12 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("gif", gif);
   });
 
+  //Listen for Emoji
+  socket.on("emoji", (emoji) => {
+    //Send Emoji to everyone in chatroom except user
+    socket.broadcast.emit("emoji", emoji);
+  });
+
   //Runs when someone is typing
   socket.on("typing", (incoming) => {
     const user = getUserFromList(socket.id);
@@ -93,6 +102,11 @@ io.on("connection", (socket) => {
       removeUserIdFromRoom(user.room, socket.id)
       //Send to the specific room that user left
       io.to(user.room).emit("leaving", user.username);
+      //Check which users are in the room
+      const usersInRoom = usersInChatroom(user.room);
+
+      //Send room info
+      io.to(user.room).emit('roomInfo', { users: usersInRoom, name: user.room});
     }
   });
 });

@@ -14,9 +14,19 @@ function findEmoji() {
         chr.innerText = content[0].character;
         out.appendChild(chr);
         emojiSelector.value = "";
+        //Send Emoji to server
+        socket.emit("emoji", content[0].character);
       })
       .catch((err) => {
         console.error(err);
       });
   }
 }
+
+//Listen for Emoji
+socket.on("emoji", (emoji) => {
+  let chr = document.createElement("li");
+  let out = document.querySelector("#message-box");
+  chr.innerText = emoji;
+  out.appendChild(chr);
+});
