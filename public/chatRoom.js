@@ -5,6 +5,7 @@ sendBtn.addEventListener("click", sendMessage);
 
 let typing = false;
 let timeout = undefined;
+let messageBox = document.getElementById('message-box');
 
 //Get username from url
 const { user, room, pwd, newRoom } = Qs.parse(location.search, {
@@ -21,7 +22,6 @@ if(!!newRoom) {
   socket.emit("joinChat", { user, room, pwd });
 
 }
-
 
 //Checks for user that joins room
 socket.on('joined', (incoming) => {
@@ -53,8 +53,26 @@ socket.on("message", (msg) => {
 
 //Listen for information about chatroom
 socket.on('roomInfo', (incoming) => {
-  /* let userList = incoming.users; */
-
+  let userContainer = document.getElementById('user-list');
+  let roomContainer = document.getElementById('room');
+  roomContainer.innerText = '';
+  userContainer.innerText = '';
+  if(incoming.users) {
+    for (let i = 0; i < incoming.users.length; i++) {
+      const user = incoming.users[i];
+      let userName = document.createElement('li');
+      userName.innerText = user;
+      userContainer.appendChild(userName);
+    }
+  }  else {
+    let userName = document.createElement('li');
+    userName.innerText = 'Only you have joined';
+    userContainer.appendChild(userName);
+      
+  }
+  let roomName = document.createElement('li');
+  roomName.innerText = incoming.name;
+  roomContainer.appendChild(roomName);
 })
 
 function showMessage(msg) {
@@ -62,10 +80,11 @@ function showMessage(msg) {
   const message = document.createElement("li");
   message.innerText = `${msg.userName}: ${msg.message}`;
   messageBox.append(message);
+  //Scroll down
+  messageBox.scrollTop = messageBox.scrollHeight;
 }
 
 //Check to see if someone is typing
-
 function timeoutTypingFunction() {
   typing = false;
   socket.emit("typing", { typing: typing, userName: user });
