@@ -14,6 +14,7 @@ function findEmoji() {
         chr.innerText = content[0].character;
         out.appendChild(chr);
         emojiSelector.value = "";
+        out.scrollTop = out.scrollHeight;
         //Send Emoji to server
         socket.emit("emoji", content[0].character);
       })

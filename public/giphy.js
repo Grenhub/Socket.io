@@ -25,6 +25,7 @@ function checkForGif() {
         fig.appendChild(img);
         let out = document.querySelector("#message-box");
         out.appendChild(fig);
+        out.scrollTop = out.scrollHeight;
 
         //Empty input
         gifSelector.value = "";
