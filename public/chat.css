@@ -7,6 +7,7 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 100vh;
 }
@@ -50,6 +51,11 @@ body {
   height: 22px;
 }
 
+#typing-box li {
+  list-style-type: none;
+  margin-left: 5px;
+}
+
 .send-box {
   width: 100%;
   height: auto;
@@ -84,7 +90,7 @@ body {
 }
 
 .gif {
-  max-width: 100%;
+  width: 50%;
   height: auto;
 }
 
@@ -150,6 +156,9 @@ body {
 @media screen and (max-width: 768px) {
   .chat-container {
     width: 100%;
+  }
+  .gif {
+    width: 80%;
   }
 }
 

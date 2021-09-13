@@ -32,6 +32,17 @@ socket.on('joined', (incoming) => {
   }
 })
 
+//Listens for new user to inform users in chat
+socket.on('newUserJoined', (incoming) => {
+  const messageBox = document.getElementById("message-box");
+  const message = document.createElement("li");
+  message.innerText = `${incoming.userName} has joined the chat`;
+  messageBox.append(message);
+  //Scroll down
+  messageBox.scrollTop = messageBox.scrollHeight;
+})
+
+//Send message to server when send button is clicked
 function sendMessage() {
   const input = document.getElementById("message");
   const chatMessage = input.value;
