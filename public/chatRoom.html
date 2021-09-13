@@ -10,17 +10,18 @@
     <script src="chatRoom.js" defer></script>
     <script src="giphy.js" defer></script>
     <script src="emoji.js" defer></script>
-    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="chat.css" />
   </head>
 
   <body>
-    <div class="text-1">Try our emojis and gifs with /<span class="jsType"></span>
+    <div class="text-1">
+      Try our emojis and gifs with /<span class="jsType"></span>
     </div>
     <div class="chat-container">
       <div class="message-container">
         <div id="message-box"></div>
         <div id="typing-box"></div>
-        
+
         <div class="send-box">
           <input
             oninput="someoneIsTyping(); test()"
@@ -39,7 +40,7 @@
       </div>
       <div id="side-users">
         <h3>Room</h3>
-        <div id="room"></div>  
+        <div id="room"></div>
         <h3>Users</h3>
         <div id="user-list"></div>
         <div class="leaveBtn">
