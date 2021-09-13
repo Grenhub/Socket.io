@@ -18,14 +18,12 @@ if(!!newRoom) {
 } else {
   //Passwordcheck
   //Send username to server so we can save this in a list
-  console.log(user + room + pwd)
   socket.emit("joinChat", { user, room, pwd });
 
 }
 
 //Checks for user that joins room
 socket.on('joined', (incoming) => {
-  console.log(incoming.pwd)
   if(!incoming.pwd) {
     alert('WRONG PASSWORD');
     location.replace('http://localhost:3000');
@@ -99,7 +97,6 @@ function showMessage(msg) {
 function timeoutTypingFunction() {
   typing = false;
   socket.emit("typing", { typing: typing, userName: user });
-  console.log(typing);
 }
 
 function someoneIsTyping() {

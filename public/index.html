@@ -5,27 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <script src="/socket.io/socket.io.js" defer></script>
     <title>Chat</title>
     <script src="logic.js" defer></script>
   </head>
   <body>
-    <h2>Join</h2>
-    <div class="container">
-    <form action="chatRoom.html">
-      <input type="text" name="user" placeholder="Name" />
-      <input type="text" name="room" placeholder="Chatroom" id="room"/>
-      <input type="password" placeholder="Password" name="pwd"/>
-      <button type="submit" id="chat">Chat</button>
-    </form>
-  </div>
+    <div id="hiddenRoom">
+      <h2>Join</h2>
+      <div class="container">
+        <form action="chatRoom.html">
+          <input type="text" name="user" placeholder="Name" />
+          <input type="text" name="room" placeholder="Chatroom" id="room" />
+          <input type="password" placeholder="Password" name="pwd" />
+          <button type="submit" id="chat">Chat</button>
+        </form>
+      </div>
+    </div>
     <h2>Create</h2>
     <div class="container">
-    <form action="chatRoom.html">
-      <input type="text" name="user" placeholder="Name" />
-      <input type="text" name="newRoom" placeholder="Chatroom" id="room"/>
-      <input type="password" placeholder="Password" name="pwd"/>
-      <button type="submit" id="create">Create</button>
-    </form>
-  </div>
+      <form action="chatRoom.html">
+        <input type="text" name="user" placeholder="Name" />
+        <input type="text" name="newRoom" placeholder="Chatroom" id="room" />
+        <input type="password" placeholder="Password" name="pwd" />
+        <button type="submit" id="create">Create</button>
+      </form>
+    </div>
   </body>
 </html>

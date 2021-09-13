@@ -8,3 +8,42 @@ Three easy steps to start the project -
 3. Now in your terminal go ahead and type "npm start" to launch the chat app on http://localhost:3000
 
 https://github.com/Grenhub/Socket.io
+
+
+Krav för godkänt:
+
+En fungerade chatt med gränssnitt där man kan skriva ett kommando ”/” för att utföra en operation som integrerar med 3-part.
+✅
+
+När någon skriver skall det synas för andra.
+✅
+
+Då en person lämnar chatten skall detta tydligt visas för alla andra i chatten.
+✅
+
+Git & GitHub har använts
+✅
+
+Projektmappen innehåller en README.md fil
+✅
+
+Uppgiften lämnas in i tid!
+
+
+
+Krav för väl godkänt:
+
+Alla punkter för godkänt är uppfyllda
+✅
+
+Det ska gå att välja ett nick
+✅
+
+Det ska gå att skapa och joina ett rum med lösenord
+✅
+
+Lösenord till rum samt vilka sockens (spara socket-id) som tillhör ett rum skall sparas i en separat lista på servern
+✅
+
+Det ska finnas minst 3 kommandon (minst två olika 3-part API’er)
+✅

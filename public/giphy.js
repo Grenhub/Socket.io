@@ -55,6 +55,7 @@ function test() {
 socket.on("gif", (gif) => {
   let fig = document.createElement("figure");
   let img = document.createElement("img");
+  img.classList.add('gif');
   img.src = gif;
   fig.appendChild(img);
   let out = document.querySelector("#message-box");
