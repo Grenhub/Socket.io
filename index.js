@@ -41,9 +41,12 @@ io.on("connection", (socket) => {
 
     //Check which users are in the room
     const usersInRoom = usersInChatroom(incoming.room);
-
+    
     //Send room info
     io.to(incoming.room).emit('roomInfo', { users: usersInRoom, name: incoming.room });
+
+    //Inform users in room that a new user has joined (to everyone except user)
+    socket.broadcast.to(incoming.room).emit('newUserJoined', { userName: incoming.user });
     
     //Send message to the user that is connecting
     socket.emit('message', { message: `Welcome to chatroom ${incoming.room}`, userName: 'Bot' });
