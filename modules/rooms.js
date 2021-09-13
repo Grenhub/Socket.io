@@ -11,7 +11,6 @@ function createRoom(roomName, roomPwd, inputuserId) {
         ]
     }
     rooms.push(room);
-    console.log(rooms);
     return room;
 }
 
@@ -29,13 +28,9 @@ function removeUserIdFromRoom(roomToLeave, id) {
     for (let i = 0; i < rooms.length; i++) {
         const room = rooms[i];
         if(room.name === roomToLeave) {
-            console.log('1. dessa finns i rummet:');
-            console.log(room.userId);
             for (let index = 0; index < room.userId.length; index++) {
                 if(room.userId[index] === id) {
                     room.userId.splice(index, 1);
-                    console.log('2. dessa finns i rummet:');
-                    console.log(room.userId);
                 }
             }
         }
@@ -48,15 +43,17 @@ function checkPassword(roomName, pwd) {
     rooms.forEach(room => {
         if(room.name === roomName) {
             if(room.pwd === pwd) {
-                console.log('RÄTT LÖSENORD');
                 result = true;
             } else {
-                console.log('FEL LÖSENORD');
                 result = false;
             }
         }
     })
     return result;
+}
+
+function checkForRoom() {
+    return rooms.length;
 }
 
 //Export functions
@@ -65,4 +62,5 @@ module.exports = {
     createRoom,
     addUserToRoom,
     removeUserIdFromRoom,
+    checkForRoom
 }

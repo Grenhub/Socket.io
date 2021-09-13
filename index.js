@@ -9,16 +9,27 @@ const {
   addUserToList,
   getUserFromList,
   removeUserFromList,
-  usersInChatroom
+  usersInChatroom,
 } = require("./modules/users");
 
-const { checkPassword, createRoom, addUserToRoom, removeUserIdFromRoom } = require('./modules/rooms');
+const {
+  checkPassword,
+  createRoom,
+  addUserToRoom,
+  removeUserIdFromRoom,
+  checkForRoom
+} = require("./modules/rooms");
 
 //Serves a static file from public folder
 app.use(express.static("public"));
 
 //All connecting users
 io.on("connection", (socket) => {
+  //Shows join if room is created
+  socket.on("showJoin", () => {
+    let roomList = checkForRoom();
+    socket.emit("showJoin", roomList)
+  });
   //Saves current user to userlist
   socket.on("joinChat", (incoming) => {
     //Add user to user list
@@ -26,14 +37,14 @@ io.on("connection", (socket) => {
 
     //Check password
     let correctPwd = checkPassword(incoming.room, incoming.pwd);
-  
+
     //If password is wrong send back false
-    if(!correctPwd) {
-      socket.emit('joined', { pwd: false }); 
+    if (!correctPwd) {
+      socket.emit("joined", { pwd: false });
     } else {
-      socket.emit('joined', { pwd: true, room: incoming.room });
+      socket.emit("joined", { pwd: true, room: incoming.room });
     }
-    
+
     //User joins room
     socket.join(incoming.room);
     //User id adds to list of rooms
@@ -41,20 +52,27 @@ io.on("connection", (socket) => {
 
     //Check which users are in the room
     const usersInRoom = usersInChatroom(incoming.room);
-    
+
     //Send room info
-    io.to(incoming.room).emit('roomInfo', { users: usersInRoom, name: incoming.room });
+    io.to(incoming.room).emit("roomInfo", {
+      users: usersInRoom,
+      name: incoming.room,
+    });
 
     //Inform users in room that a new user has joined (to everyone except user)
-    socket.broadcast.to(incoming.room).emit('newUserJoined', { userName: incoming.user });
-    
+    socket.broadcast
+      .to(incoming.room)
+      .emit("newUserJoined", { userName: incoming.user });
+
     //Send message to the user that is connecting
-    socket.emit('message', { message: `Welcome to chatroom ${incoming.room}`, userName: 'Bot' });
-    
+    socket.emit("message", {
+      message: `Welcome to chatroom ${incoming.room}`,
+      userName: "Bot",
+    });
   });
-  
+
   //Create new room
-  socket.on('newRoom', (incoming) => {
+  socket.on("newRoom", (incoming) => {
     //Add user to user list
     const user = addUserToList(incoming.user, socket.id, incoming.newRoom);
     createRoom(incoming.newRoom, incoming.pwd, socket.id);
@@ -63,12 +81,14 @@ io.on("connection", (socket) => {
     //User id adds to list of rooms
     //addUserToRoom(incoming.newRoom, socket.id);
     //Send message to the user that is connecting
-    socket.emit('message', { message: `Welcome to chatroom ${incoming.newRoom}`, userName: 'Bot' });
+    socket.emit("message", {
+      message: `Welcome to chatroom ${incoming.newRoom}`,
+      userName: "Bot",
+    });
 
     //Send room info
-    socket.emit('roomInfo', { name: incoming.newRoom });
-  })
-
+    socket.emit("roomInfo", { name: incoming.newRoom });
+  });
 
   //Listen for messages from client
   socket.on("message", (msg) => {
@@ -79,7 +99,6 @@ io.on("connection", (socket) => {
 
   //Listen for GIF
   socket.on("gif", (gif) => {
-    console.log("Gif: " + gif);
     //Send GIF to everyone in chatroom except user
     socket.broadcast.emit("gif", gif);
   });
@@ -93,7 +112,7 @@ io.on("connection", (socket) => {
   //Runs when someone is typing
   socket.on("typing", (incoming) => {
     const user = getUserFromList(socket.id);
-   
+
     //Sends to everyone except current user
     socket.broadcast.to(user.room).emit("typing", incoming);
   });
@@ -102,14 +121,17 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     const user = removeUserFromList(socket.id);
     if (user) {
-      removeUserIdFromRoom(user.room, socket.id)
+      removeUserIdFromRoom(user.room, socket.id);
       //Send to the specific room that user left
       io.to(user.room).emit("leaving", user.username);
       //Check which users are in the room
       const usersInRoom = usersInChatroom(user.room);
 
       //Send room info
-      io.to(user.room).emit('roomInfo', { users: usersInRoom, name: user.room});
+      io.to(user.room).emit("roomInfo", {
+        users: usersInRoom,
+        name: user.room,
+      });
     }
   });
 });
