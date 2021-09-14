@@ -29,7 +29,7 @@ function checkForGif() {
 
         //Empty input
         gifSelector.value = "";
-        test();
+        showDatalist();
 
         //Send GIF to server
         socket.emit("gif", content.data[0].images.downsized.url);
@@ -41,11 +41,11 @@ function checkForGif() {
 }
 
 //Ignores first action onto our input/datalist and calls for datalist whenever first character is "/"
-function test() {
-  let test = document.getElementById("message");
+function showDatalist() {
+  let inputField = document.getElementById("message");
   let datalist = document.querySelector("datalist");
-  if (test.value.substr(0, 1) === "/") {
-    datalist.id = "test";
+  if (inputField.value.substr(0, 1) === "/") {
+    datalist.id = "listGif";
   } else {
     datalist.id = "";
   }
