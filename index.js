@@ -25,25 +25,25 @@ app.use(express.static("public"));
 
 //All connecting users
 io.on("connection", (socket) => {
-  //Shows join if room is created
+  //Shows join if room is created (from logic.js)
   socket.on("showJoin", () => {
     let roomList = checkForRoom();
     socket.emit("showJoin", roomList)
   });
   //Saves current user to userlist
   socket.on("joinChat", (incoming) => {
-    //Add user to user list
-    const user = addUserToList(incoming.user, socket.id, incoming.room);
-
     //Check password
     let correctPwd = checkPassword(incoming.room, incoming.pwd);
 
     //If password is wrong send back false
     if (!correctPwd) {
       socket.emit("joined", { pwd: false });
+      return;
     } else {
       socket.emit("joined", { pwd: true, room: incoming.room });
     }
+     //Add user to user list
+     const user = addUserToList(incoming.user, socket.id, incoming.room);
 
     //User joins room
     socket.join(incoming.room);
@@ -93,20 +93,22 @@ io.on("connection", (socket) => {
   //Listen for messages from client
   socket.on("message", (msg) => {
     const user = getUserFromList(socket.id);
-    //Send message to specific room, to everyone except user
+    //Send message to specific room, to everyone 
     io.to(user.room).emit("message", msg);
   });
 
   //Listen for GIF
   socket.on("gif", (gif) => {
+    const user = getUserFromList(socket.id);
     //Send GIF to everyone in chatroom except user
-    socket.broadcast.emit("gif", gif);
+    socket.broadcast.to(user.room).emit("gif", gif);
   });
 
   //Listen for Emoji
   socket.on("emoji", (emoji) => {
+    const user = getUserFromList(socket.id);
     //Send Emoji to everyone in chatroom except user
-    socket.broadcast.emit("emoji", emoji);
+    socket.broadcast.to(user.room).emit("emoji", emoji);
   });
 
   //Runs when someone is typing
