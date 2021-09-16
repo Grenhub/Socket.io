@@ -1,4 +1,4 @@
-//API key for giphy
+// API key for giphy
 let APIKEY = "tr2OkLA6uZVI7cP4xHKh6u3empxNQ5rz";
 const sendGif = document.getElementById("sendBtn");
 sendGif.addEventListener("click", checkForGif);
@@ -6,7 +6,7 @@ sendGif.addEventListener("click", checkForGif);
 function checkForGif() {
   let url = `https://api.giphy.com/v1/gifs/search?api_key=${APIKEY}&limit=1&q=`;
   let gifSelector = document.getElementById("message");
-  //Checking if first character is /
+  // Checking if first character is /
   if (gifSelector.value.substr(0, 1) === "/") {
     if(gifSelector.value === '/xD') {
       return;
@@ -16,7 +16,7 @@ function checkForGif() {
     fetch(url)
       .then((response) => response.json())
       .then((content) => {
-        //Creating HTML elements which retrieves downsized gifs
+        // Creating HTML elements which retrieves downsized gifs
         let fig = document.createElement("figure");
         let img = document.createElement("img");
         img.src = content.data[0].images.downsized.url;
@@ -28,11 +28,11 @@ function checkForGif() {
         
         messageBox.scrollTop = messageBox.scrollHeight;
 
-        //Empty input
+        // Empty input
         gifSelector.value = "";
         showDatalist();
 
-        //Send GIF to server
+        // Send GIF to server
         socket.emit("gif", content.data[0].images.downsized.url);
       })
       .catch((err) => {
@@ -41,7 +41,7 @@ function checkForGif() {
   }
 }
 
-//Ignores first action onto our input/datalist and calls for datalist whenever first character is "/"
+// Ignores first action onto our input/datalist and calls for datalist whenever first character is "/"
 function showDatalist() {
   let inputField = document.getElementById("message");
   let datalist = document.querySelector("datalist");
@@ -52,7 +52,7 @@ function showDatalist() {
   }
 }
 
-//Listen for GIF
+// Listen for GIF
 socket.on("gif", (gif) => {
   let fig = document.createElement("figure");
   let img = document.createElement("img");
