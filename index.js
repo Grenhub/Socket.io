@@ -47,6 +47,7 @@ io.on("connection", (socket) => {
 
     //User joins room
     socket.join(incoming.room);
+    
     //User id adds to list of rooms
     addUserToRoom(incoming.room, socket.id);
 
