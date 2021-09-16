@@ -140,7 +140,7 @@ inputText.addEventListener("keyup", function (event) {
 });
 
 var typed = new Typed(".jsType", {
-  strings: ["xD", "kitten", "programming", "creepysmile"],
+  strings: ["xD", "kitten", "programming", "dino"],
   typeSpeed: 100,
   backSpeed: 60,
   loop: true,

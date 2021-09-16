@@ -11,8 +11,8 @@ function checkForGif() {
     if(gifSelector.value === '/xD') {
       return;
     }
-    let str = gifSelector.value;
-    url = url.concat(str);
+    let searchGif = gifSelector.value;
+    url = url.concat(searchGif);
     fetch(url)
       .then((response) => response.json())
       .then((content) => {
@@ -23,9 +23,10 @@ function checkForGif() {
         img.alt = content.data[0].title;
         img.classList.add('gif');
         fig.appendChild(img);
-        let out = document.querySelector("#message-box");
-        out.appendChild(fig);
-        out.scrollTop = out.scrollHeight;
+        let messageBox = document.getElementById("message-box");
+        messageBox.appendChild(fig);
+        
+        messageBox.scrollTop = messageBox.scrollHeight;
 
         //Empty input
         gifSelector.value = "";
@@ -58,6 +59,6 @@ socket.on("gif", (gif) => {
   img.classList.add('gif');
   img.src = gif;
   fig.appendChild(img);
-  let out = document.querySelector("#message-box");
-  out.appendChild(fig);
+  let messageBox = document.getElementById("message-box");
+  messageBox.appendChild(fig);
 });
